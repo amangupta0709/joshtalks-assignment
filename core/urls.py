@@ -15,10 +15,8 @@ Including another URLconf
 """
 from api.background import fetch_api
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-]
+urlpatterns = [path("admin/", admin.site.urls), path("api/", include("api.urls"))]
 
-fetch_api(repeat=60, repeat_until=None)
+fetch_api(repeat=2, repeat_until=None)

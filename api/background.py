@@ -7,12 +7,12 @@ from googleapiclient.discovery import build
 from .models import Video
 
 
-@background(schedule=5)
+@background(schedule=1)
 def fetch_api():
     Video.objects.all().delete()
     youtube = build("youtube", "v3", developerKey=settings.YOUTUBE_API_KEY)
     req = youtube.search().list(
-        q="football", part="snippet", type="video", maxResults=2
+        q="football", part="snippet", type="video", maxResults=100
     )
     res = req.execute()["items"]
     for data in res:
